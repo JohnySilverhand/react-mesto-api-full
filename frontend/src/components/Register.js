@@ -9,7 +9,7 @@ function Register({onButtonClick}) {
   let history =  useHistory();
 
   function onLogin() {
-    history.push('/sign-in');
+    history.push('/signin');
   }
 
   function handlePassword(e) {

@@ -10,7 +10,7 @@ function Login({onAuthorize}) {
   let history =  useHistory();
 
   function onRegister() {
-    history.push('/sign-up');
+    history.push('/signup');
   }
 
   function handlePassword(e) {
