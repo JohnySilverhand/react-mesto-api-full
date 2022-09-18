@@ -1,0 +1,9 @@
+.profile__flex-row {
+  display: flex;
+}
+
+@media (min-width: 320px) and (max-width: 1023px){
+  .profile__flex-row {
+    flex-direction: column;
+  }
+}

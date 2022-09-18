@@ -1,0 +1,37 @@
+.element {
+  width: 100%;
+  max-width: 282px;
+  margin: 0;
+  list-style: none;
+  background-color: white;
+  border-radius: 10px;
+  min-height: 361px;
+  position: relative;
+}
+
+.element:last-child {
+  margin-right: 0;
+}
+
+.element:nth-child(3) {
+  margin-right: 0;
+  }
+
+@media (min-width: 320px) and (max-width: 1023px){
+  .element {
+    margin-right: 0;
+  }
+}
+
+@media (min-width: 634px) and (max-width: 1023px) {
+  .element {
+    margin-right: 17px;
+  }
+  .element:nth-child(3) {
+    margin-right: 17px;
+  }
+
+  .element:last-child {
+    margin-right: 17px;
+  }
+}
