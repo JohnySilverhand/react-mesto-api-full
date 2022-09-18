@@ -204,12 +204,12 @@ function App() {
   <CurrentUserContext.Provider value={currentUser}>
       <div className="page">
         <Switch>
-          <Route exact={true} path="/sign-in">
+          <Route exact={true} path="/signin">
             <Login
               onAuthorize={onAuthorize}
             />
           </Route>
-          <Route exact={true} path="/sign-up">
+          <Route exact={true} path="/signup">
             <Register 
               onButtonClick={onRegister}
             />
