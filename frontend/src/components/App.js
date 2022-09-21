@@ -160,7 +160,7 @@ function App() {
 
   function deleteToken() {
     localStorage.removeItem('token');
-    history.push('/sign-in')
+    history.push('/signin')
     setLoggedIn(false)
   }
 
@@ -171,7 +171,7 @@ function App() {
           setInfoTooltip(true)
           setText('Вы успешно зарегестрировались!')
           setImage(yes)
-          history.push('./sign-in');
+          history.push('./signin');
         }
       })
     .catch((err) => {
