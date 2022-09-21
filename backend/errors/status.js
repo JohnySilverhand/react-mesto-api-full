@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const ERROR_CODE = 400;
 const NOT_FOUND = 404;
 const SUCCESS = 201;
@@ -16,22 +15,3 @@ module.exports = {
   CONFLICT_ERROR,
   UNAUTHORIZED_ERROR,
 };
-=======
-const ERROR_CODE = 400;
-const NOT_FOUND = 404;
-const SUCCESS = 201;
-const SERVER_ERROR = 500;
-const FORBIDDEN_ERROR = 403;
-const CONFLICT_ERROR = 409;
-const UNAUTHORIZED_ERROR = 401;
-
-module.exports = {
-  ERROR_CODE,
-  NOT_FOUND,
-  SUCCESS,
-  SERVER_ERROR,
-  FORBIDDEN_ERROR,
-  CONFLICT_ERROR,
-  UNAUTHORIZED_ERROR,
-};
->>>>>>> 97da421253f9a79b35334e14902ab34ec9ffb303
