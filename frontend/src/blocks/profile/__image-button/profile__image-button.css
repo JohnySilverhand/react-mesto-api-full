@@ -1,0 +1,15 @@
+.profile__image-button {
+	padding: 0;
+	background-image: url('../../../images/pencil.svg');
+	background-color: transparent;
+	background-repeat: no-repeat;
+	width: 26px;
+	height: 26px;
+	cursor: pointer;
+	opacity: 0;
+	transition: opacity .5s ease-in-out;
+	position: relative;
+	top: 44px;
+  right: 72px;
+	border: none;
+}

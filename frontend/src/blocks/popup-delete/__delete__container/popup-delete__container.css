@@ -1,0 +1,6 @@
+.popup-delete__container {
+	max-width: 430px;
+	min-height: 181px;
+	box-sizing: border-box;
+	padding: 34px 36px 36px;
+}
