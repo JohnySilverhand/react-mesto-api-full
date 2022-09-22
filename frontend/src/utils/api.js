@@ -80,7 +80,7 @@ class Api {
 }
 
 const api = new Api({
-	url: 'https://mesto.backenddru.nomoredomains.sbs',
+	url: 'https://api.mesta.students.nomoredomains.sbs',
 	headers: {
 		 authorization: `Bearer ${token}`,
 		'Content-Type': 'application/json',

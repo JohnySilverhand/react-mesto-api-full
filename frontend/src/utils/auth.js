@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://mesto.backenddru.nomoredomains.sbs';
+export const BASE_URL = 'https://project.nomorepartiesxyz.ru';
 
 const handleResponse = (res) => {
   if(res.ok) {
