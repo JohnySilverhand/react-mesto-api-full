@@ -139,23 +139,22 @@ function App() {
   }
 
   function handleTokenCheck() {
-    if(localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
+      if (!token) {
+        return
+      }
       if(token) {
         auth.getContent(token)
           .then((res) => {
-            if(res){
               const email = res.user.email;
               setLoggedIn(true)
               setUserEmail(email);
-            }
             history.push('/')
           })
           .catch((err) => {
             console.log(err);
           })
       }
-    }
   }
 
   function deleteToken() {
@@ -185,12 +184,10 @@ function App() {
   function onAuthorize(email, password) {
     auth.authorize(email, password)
       .then((data) => {
-        if(data.token) {
         localStorage.setItem('token', data.token)
         setLoggedIn(true);
         setUserEmail(email);
         history.push('/')
-        }
       })
       .catch((err) => {
         console.log(err);
