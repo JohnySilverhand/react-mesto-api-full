@@ -145,7 +145,7 @@ function App() {
         auth.getContent(token)
           .then((res) => {
             if(res){
-              const email = res.user.email
+              const email = res.user.email;
               setLoggedIn(true)
               setUserEmail(email);
             }
