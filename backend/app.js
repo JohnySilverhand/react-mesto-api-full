@@ -1,9 +1,9 @@
 require('dotenv').config();
 const express = require('express');
-const cors = require('cors');
 const { errors, Joi, celebrate } = require('celebrate');
 const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
+const cors = require('./middlewares/cors');
 const userRouter = require('./routes/users');
 const { login, createUser } = require('./controllers/users');
 const cardRouter = require('./routes/cards');
