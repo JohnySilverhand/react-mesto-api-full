@@ -1,9 +1,14 @@
 const token = localStorage.getItem('token');
 
 class Api {
-	constructor({url, headers}) {
+	constructor({url, headers, token}) {
 		this._url = url;
 		this._headers = headers;
+		this._token = headers.authorization;
+	}
+
+	getToken = (token) => {
+		this._token = `Bearer ${token}`
 	}
 
 	handleResponse(res) {
@@ -15,14 +20,18 @@ class Api {
 
 	getCards() {
 		return fetch (`${this._url}/cards`, {
-			headers: this._headers
+			headers: {
+				authorization: this._token
+			}
 		})
 		.then((res) => this.handleResponse(res));
 	}
 
 	getProfileInfo() {
 		return fetch (`${this._url}/users/me`, {
-			headers: this._headers
+			headers: {
+				authorization: this._token
+			}
 		})
 		.then((res) => this.handleResponse(res));
 	}
