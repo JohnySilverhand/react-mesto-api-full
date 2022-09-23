@@ -140,15 +140,14 @@ function App() {
 
   function handleTokenCheck() {
       const token = localStorage.getItem('token');
-      if (!token) {
-        return
-      }
       if(token) {
         auth.getContent(token)
           .then((res) => {
+            if (res) {
               const email = res.user.email;
               setLoggedIn(true)
               setUserEmail(email);
+          }
             history.push('/')
           })
           .catch((err) => {
@@ -159,8 +158,9 @@ function App() {
 
   function deleteToken() {
     localStorage.removeItem('token');
-    history.push('/signin')
-    setLoggedIn(false)
+    history.push('/signin');
+    setLoggedIn(false);
+    setUserEmail(null);
   }
 
   function onRegister(email, password) {
