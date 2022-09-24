@@ -86,7 +86,6 @@ module.exports.updateUser = (req, res, next) => {
     {
       new: true,
       runValidators: true,
-      upsert: false,
     },
   )
     .orFail(() => {
@@ -110,7 +109,6 @@ module.exports.updateAvatar = (req, res, next) => {
     {
       new: true,
       runValidators: true,
-      upsert: false,
     },
   )
     .orFail(() => {
