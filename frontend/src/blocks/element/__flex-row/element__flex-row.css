@@ -1,0 +1,10 @@
+.element__flex-row {
+  margin: 0 auto;
+  flex-direction: row;
+  display: flex;
+  width: 100%;
+  max-width: 246px;
+  justify-content: space-between;
+  padding-top: 18px;
+  align-items: center;
+}

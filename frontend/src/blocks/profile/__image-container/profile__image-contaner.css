@@ -1,0 +1,14 @@
+.profile__image-container:hover .profile__image {
+  background-color: black;
+  opacity: .8;
+  cursor: pointer;
+}
+
+.profile__image-container {
+  display: flex;
+}
+
+.profile__image-container:hover .profile__image-button {
+  z-index: 3;
+  opacity: 1;
+}
