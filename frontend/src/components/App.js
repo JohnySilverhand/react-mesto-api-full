@@ -65,6 +65,46 @@ function App() {
     }
   }, [loggedIn]);
 
+  React.useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      auth
+        .getContent(token)
+        .then((data) => {
+          if (data) {
+            setLoggedIn(true);
+            setUserEmail(data.email);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+  }, []);
+
+  React.useEffect(() => {
+    if (loggedIn) history.push("/");
+  }, [history, loggedIn]);
+
+  React.useEffect(() => {
+    if (loggedIn) {
+      api.addUserInfo()
+      .then((data) => {
+        setCurrentUser(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      })
+      api.getCards()
+        .then((data) => {
+          setCards(data);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  })
+
   function handleCardLike(card) {
     const isLiked = card.likes.some(item => item._id === currentUser._id );
   
@@ -139,11 +179,12 @@ function App() {
   }
 
   function handleTokenCheck() {
+    if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
       if (token) {
         auth.getContent(token)
           .then((res) => {
-            if(res){
+            if(res) {
               const email = res.user.email
               setLoggedIn(true)
               setUserEmail(email);
@@ -154,6 +195,7 @@ function App() {
             console.log(err);
           })
       }
+    }
   }
 
   function deleteToken() {
@@ -185,7 +227,8 @@ function App() {
     auth.authorize(email, password)
       .then((data) => {
         if(data.token) {
-        localStorage.setItem('tiken', data.token);
+        const token = localStorage.getItem("token");
+        api.getToken(token);
         setLoggedIn(true);
         setUserEmail(email);
         history.push('/')

@@ -6,7 +6,7 @@ import {CurrentUserContext} from "../contexts/CurrentUserContext";
 
 function Main({onEditProfile, onAddCard, onEditAvatar, userData, onCardClick, cards, onCardLike, onCardDelete, onDeleteToken}) {
 
-  const currentUser = React.useContext(CurrentUserContext);
+  const user = React.useContext(CurrentUserContext);
   const email = userData;
 
   function onSignOut() {
@@ -23,12 +23,12 @@ function Main({onEditProfile, onAddCard, onEditAvatar, userData, onCardClick, ca
       <section className="profile">
         <div className="profile__flex-row">
           <div className="profile__image-container" onClick={() => onEditAvatar(true)}>
-            <img className="profile__image" alt="картинка профиля" src={currentUser.avatar} />
+            <img className="profile__image" alt="картинка профиля" src={user.avatar} />
             <button className="profile__image-button" type="button"></button>
           </div>
         <div className="profile__info">
-          <h1 className="profile__header">{currentUser.name}</h1>
-          <p className="profile__text">{currentUser.about}</p>
+          <h1 className="profile__header">{user.name}</h1>
+          <p className="profile__text">{user.about}</p>
           <button className="profile__edit" type="button" onClick={() => onEditProfile(true)}></button>
         </div>
         </div>

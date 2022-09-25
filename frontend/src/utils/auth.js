@@ -29,6 +29,10 @@ export const authorize = (email, password) => {
     body: JSON.stringify({email, password})
   })
   .then(handleResponse)
+  .then((data) => {
+    localStorage.setItem('token', data.token);
+    return data;
+  })
 }
 
 export const getContent = (token) => {
@@ -40,5 +44,6 @@ export const getContent = (token) => {
       'Authorization': `Bearer ${token}`
     }
   })
+  .then(data => data)
   .then((res) => handleResponse(res))
 }
