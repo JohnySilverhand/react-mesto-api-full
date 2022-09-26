@@ -33,39 +33,6 @@ function App() {
   const [userEmail, setUserEmail] = useState('');
 
   React.useEffect(() => {
-    handleTokenCheck()
-  }, []);
-
-  React.useEffect(() => {
-    if(loggedIn){
-    api.getProfileInfo()
-    .then((userInfo) => {
-      setCurrentUser(userInfo)
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-
-    api.getCards()
-    .then((data) => {
-      setCards(
-        data.map((card) => ({
-          _id: card._id,
-          link: card.link,
-          name: card.name,
-          likes: card.likes,
-          owner: card.owner
-        })
-        )
-      )
-    })
-    .catch((err) => {
-      console.log(err);
-    })
-    }
-  }, [loggedIn]);
-
-  React.useEffect(() => {
     const token = localStorage.getItem("token");
     if (token) {
       auth
@@ -88,7 +55,7 @@ function App() {
 
   React.useEffect(() => {
     if (loggedIn) {
-      api.addUserInfo()
+      api.getProfileInfo()
       .then((data) => {
         setCurrentUser(data);
       })
@@ -103,7 +70,7 @@ function App() {
           console.log(err);
         })
     }
-  })
+  }, [loggedIn])
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(item => item._id === currentUser._id );
@@ -137,8 +104,8 @@ function App() {
       })
   }
 
-  function handleUpdateUser(data) {
-    api.addUserInfo(data)
+  function handleUpdateUser(name, about) {
+    api.addUserInfo(name, about)
       .then((userData) => {
         setCurrentUser(userData)
         closePopups(setEditProfilePopupOpen);
@@ -197,6 +164,10 @@ function App() {
       }
     }
   }
+
+  React.useEffect(() => {
+    handleTokenCheck();
+  }, []);
 
   function deleteToken() {
     localStorage.removeItem('token');
