@@ -82,16 +82,24 @@ function App() {
 
   function handleCardLike(card) {
     const isLiked = card.likes.some(item => item === currentUser._id );
-    const action = isLiked ? api.disLikeCard(card._id) : api.likeCard (card._id); 
-  
-    action
-      .then((newCard) => {
-            setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-      })
-      .catch ((err) => {
-            console.log (err);
-      })
-} 
+    function handleNewCardLike(newCard) {
+      const newCards = cards.map((c) => c._id === card._id ? newCard : c);
+      setCards(newCards);
+    }
+    if (!isLiked) {
+      api.likeCard(card._id)
+        .then(handleNewCardLike)
+        .catch(err => {
+          console.log(err);
+        });
+    } else {
+      api.dislikeCard(card._id)
+        .then(handleNewCardLike)
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
 
   function handleCardDelete(card) {
     api.deleteCard(card, card._id)
