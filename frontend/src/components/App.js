@@ -28,9 +28,13 @@ function App() {
   const [image, setImage] = useState('');
   const [card, setCard] = useState({});
   const [cards, setCards] = useState([]);
-  const [currentUser, setCurrentUser] = useState('');
+  const [currentUser, setCurrentUser] = useState({});
   const [loggedIn, setLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState('');
+
+  React.useEffect(() => {
+    handleTokenCheck();
+  }, []);
 
   React.useEffect(() => {
     const token = localStorage.getItem("token");
@@ -50,21 +54,25 @@ function App() {
   }, []);
 
   React.useEffect(() => {
-    if (loggedIn) history.push("/");
-  }, [history, loggedIn]);
-
-  React.useEffect(() => {
     if (loggedIn) {
       api.getProfileInfo()
       .then((data) => {
-        setCurrentUser(data);
+        setCurrentUser(data.user);
       })
       .catch((err) => {
         console.log(err);
       })
       api.getCards()
         .then((data) => {
-          setCards(data);
+          setCards(
+            data.map((card) => ({
+              _id: card._id,
+              link: card.link,
+              name: card.name,
+              likes: card.likes,
+              owner: card.owner
+            }))
+          )
         })
         .catch((err) => {
           console.log(err);
@@ -73,7 +81,7 @@ function App() {
   }, [loggedIn])
 
   function handleCardLike(card) {
-    const isLiked = card.likes.some(item => item._id === currentUser._id );
+    const isLiked = card.likes.some(item => item === currentUser._id );
   
     if (!isLiked) {
       api.likeCard(card)
@@ -107,7 +115,7 @@ function App() {
   function handleUpdateUser(name, about) {
     api.addUserInfo(name, about)
       .then((userData) => {
-        setCurrentUser(userData)
+        setCurrentUser(userData.user)
         closePopups(setEditProfilePopupOpen);
       })
       .catch((err) => {
@@ -118,7 +126,7 @@ function App() {
   function handleUpdateAvatar(data) {
     api.addUserAvatar(data)
       .then((userData) => {
-        setCurrentUser(userData)
+        setCurrentUser(userData.user)
         closePopups(setEditAvatarProfilePopupOpen)
       })
       .catch((err) => {
@@ -146,7 +154,6 @@ function App() {
   }
 
   function handleTokenCheck() {
-    if (localStorage.getItem('token')) {
       const token = localStorage.getItem('token');
       if (token) {
         auth.getContent(token)
@@ -162,12 +169,7 @@ function App() {
             console.log(err);
           })
       }
-    }
   }
-
-  React.useEffect(() => {
-    handleTokenCheck();
-  }, []);
 
   function deleteToken() {
     localStorage.removeItem('token');
@@ -208,6 +210,7 @@ function App() {
       .catch((err) => {
         console.log(err);
         setInfoTooltip(true)
+        setLoggedIn(false)
         setText('Что-то пошло не так! Попробуйте ещё раз.')
         setImage(no)
       })

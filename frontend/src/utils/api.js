@@ -1,7 +1,7 @@
 const token = localStorage.getItem('token');
 
 class Api {
-	constructor({url, headers}) {
+	constructor({ url, headers }) {
 		this._url = url;
 		this._headers = headers;
 		this._token = headers.authorization;
