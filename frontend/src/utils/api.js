@@ -68,16 +68,18 @@ class Api {
 		.then((res) => this.handleResponse(res));
 	}
 
-	likeCard(data) {
-		return fetch (`${this._url}/cards/${data._id}/likes`, {
+	likeCard(id) {
+		const cardId = id;
+		return fetch (`${this._url}/cards/${cardId}/likes`, {
 			method: 'PUT',
 			headers: this._headers,
 		})
 		.then((res) => this.handleResponse(res));
 	}	
 
-	dislikeCard(data) {
-		return fetch (`${this._url}/cards/${data._id}/likes`, {
+	dislikeCard(id) {
+		const cardId = id;
+		return fetch (`${this._url}/cards/${cardId}/likes`, {
 			method: 'DELETE',
 			headers: this._headers,
 		})
