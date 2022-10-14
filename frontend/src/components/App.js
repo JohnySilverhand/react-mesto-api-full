@@ -184,6 +184,7 @@ function App() {
       .then((data) => {
         if(data.token) {
         localStorage.setItem('token', data.token);
+        handleTokenCheck();
         setLoggedIn(true);
         setUserEmail(email);
         history.push('/')
