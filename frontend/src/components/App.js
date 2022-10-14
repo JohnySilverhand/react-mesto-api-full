@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {Route, Switch, useHistory } from 'react-router-dom';
 import Register from "./Register.js";
 import Login from "./Login.js";
@@ -32,28 +32,11 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [userEmail, setUserEmail] = useState('');
 
-  React.useEffect(() => {
-    handleTokenCheck();
+  useEffect(() => {
+    handleTokenCheck()
   }, []);
 
-  React.useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (token) {
-      auth
-        .getContent(token)
-        .then((data) => {
-          if (data) {
-            setLoggedIn(true);
-            setUserEmail(data.email);
-          }
-        })
-        .catch((error) => {
-          console.log(error);
-        });
-    }
-  }, []);
-
-  React.useEffect(() => {
+  useEffect(() => {
     if (loggedIn) {
       api.getProfileInfo()
       .then((data) => {
@@ -104,7 +87,8 @@ function App() {
   function handleCardDelete(card) {
     api.deleteCard(card, card._id)
       .then(() => {
-        setCards(state => state.filter((c) => c._id !== card._id));
+        const result = cards.filter((item) => item._id !== (card._id));
+        setCards(result);
       })
       .catch((err) => {
         console.log(err);
@@ -199,8 +183,7 @@ function App() {
     auth.authorize(email, password)
       .then((data) => {
         if(data.token) {
-        const token = localStorage.getItem("token");
-        api.getToken(token);
+        localStorage.setItem('token', data.token);
         setLoggedIn(true);
         setUserEmail(email);
         history.push('/')
